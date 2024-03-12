@@ -7,14 +7,13 @@ import {
   Input,
   Button,
   Avatar,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from "@nextui-org/react";
-import { auth } from "@/auth";
+import HeaderAuth from "./Header-Auth";
 
-type Props = {};
-
-const Header = async () => {
-  const session = await auth();
-
+const Header = () => {
   return (
     <Navbar className="shadow m-6">
       <NavbarBrand>
@@ -28,10 +27,9 @@ const Header = async () => {
           <Input />
         </NavbarItem>
       </NavbarContent>
+
       <NavbarContent justify="end">
-        <NavbarItem>
-          {session?.user ? <div>Sign In</div> : <div>Sign Out</div>}
-        </NavbarItem>
+        <HeaderAuth />
       </NavbarContent>
     </Navbar>
   );
