@@ -1,3 +1,6 @@
+"use client";
+import { useFormState } from "react-dom";
+
 import {
   Button,
   Input,
@@ -7,15 +10,22 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 import * as actions from "@/actions";
+import FormButton from "../common/form-button";
 
 const TopicCreateForm = () => {
+  const [formState, action] = useFormState(actions.createTopic, {
+    errors: {},
+  });
+
+  console.log(formState, "===");
+
   return (
     <Popover placement="left">
       <PopoverTrigger>
         <Button color="primary">Create a Topic</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form action={actions.createTopic}>
+        <form action={action}>
           <div className="flex flex-col p-4 gap-4 w-80">
             <h1 className="text-lg">Create a topic</h1>
             <Input
@@ -23,14 +33,27 @@ const TopicCreateForm = () => {
               label="Name"
               labelPlacement="outside"
               placeholder="Name"
+              isInvalid={!!formState.errors.name}
+              errorMessage={formState.errors.name?.join(", ")}
             />
+
             <Textarea
               name="description"
               label="Description"
               labelPlacement="outside"
               placeholder="Discribe your topic"
+              isInvalid={!!formState.errors.description}
+              errorMessage={formState.errors.description?.join(", ")}
             />
-            <Button type="submit">Submit</Button>
+
+            {formState.errors._form ? (
+              <div className="bg-red-400 p-2 border border-red-400">
+                {formState.errors._form?.join(", ")}
+              </div>
+            ) : null}
+
+            {/* <div>{formState.errors.description?.join(", ")}</div> */}
+            <FormButton>Save</FormButton>
           </div>
         </form>
       </PopoverContent>
