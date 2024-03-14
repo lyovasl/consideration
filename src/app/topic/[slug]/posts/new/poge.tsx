@@ -1,7 +1,7 @@
 type Props = {};
 
-const PostCreatePost = () => {
+const PostCreate = () => {
   return <div>Post Create</div>;
 };
 
-export default PostCreatePost;
+export default PostCreate;
