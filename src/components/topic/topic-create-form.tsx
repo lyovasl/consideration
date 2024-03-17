@@ -16,7 +16,7 @@ const TopicCreateForm = () => {
   const [formState, action] = useFormState(actions.createTopic, {
     errors: {},
   });
-
+  console.log(formState.errors, "-");
   // console.log(formState, "===");
 
   return (
@@ -36,7 +36,6 @@ const TopicCreateForm = () => {
               isInvalid={!!formState.errors.name}
               errorMessage={formState.errors.name?.join(", ")}
             />
-
             <Textarea
               name="description"
               label="Description"
@@ -45,14 +44,17 @@ const TopicCreateForm = () => {
               isInvalid={!!formState.errors.description}
               errorMessage={formState.errors.description?.join(", ")}
             />
-
             {formState.errors._form ? (
               <div className="bg-red-400 p-2 border border-red-400">
-                {formState.errors._form?.join(", ")}
+                {formState.errors._form}
               </div>
             ) : null}
 
-            {/* <div>{formState.errors.description?.join(", ")}</div> */}
+            {/* <div className="bg-green-600 p-2 border border-red-400">
+              {formState.errors._form?.join(", ")}
+            </div> */}
+
+            {/* { <div>{formState.errors.description?.join(", ")}</div> }///* Textarea error */}
             <FormButton>Save</FormButton>
           </div>
         </form>

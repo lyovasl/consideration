@@ -11,10 +11,17 @@ import {
 } from "@nextui-org/react";
 import FormButton from "../common/form-button";
 
-const PostCreateForm = () => {
-  const [formState, action] = useFormState(actions.createPost, {
-    errors: {},
-  });
+interface CreatePostFormProps {
+  slug: string;
+}
+
+const PostCreateForm = ({ slug }: CreatePostFormProps) => {
+  const [formState, action] = useFormState(
+    actions.createPost.bind(null, slug),
+    {
+      errors: {},
+    }
+  );
 
   console.log(formState, "***");
 
@@ -44,12 +51,11 @@ const PostCreateForm = () => {
               labelPlacement="outside"
               placeholder="Content"
             />
-{/* 
             {formState.errors._form ? (
-              <div className="bg-green-900">YES</div>
-            ) : (
-              <div>No</div>
-            )} */}
+              <div className="rounded p-2 bg-red-200 border border-red-400">
+                {formState.errors._form.join(", ")}
+              </div>
+            ) : null}
 
             <FormButton>Create Post</FormButton>
           </div>

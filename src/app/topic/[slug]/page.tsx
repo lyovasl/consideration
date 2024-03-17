@@ -16,7 +16,7 @@ const TopicShowPage = ({ params }: TopishShowProps) => {
       </div>
 
       <div>
-        <PostCreateForm />
+        <PostCreateForm slug={slug} />
       </div>
     </div>
   );
